@@ -1,4 +1,4 @@
-# cruiseshipconfessions
+# CruiseShipConfessions
 
 [cruiseshipconfessions.com](http://www.cruiseshipconfessions.com/)
 
@@ -17,3 +17,7 @@ submit.php submits the tweet and getTweets.php returns all tweets on the account
 # Thanks for taking a look
 
 Any and all comments, suggestions and criticisms are more than welcome.
+
+Best,
+
+Willie

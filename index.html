@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="The place where ship's staff and crew can anonymously confess their darkest secrets.">
+    <meta property="og:image" content="http://cruiseshipconfessions.com/img/og-img-1.jpg" />
+    <meta name="google-site-verification" content="tzM8sxsB4dIrWwYnzP2cTD58jmjoKbqk9sRScG7N2UI" />
+    <link rel="image_src" href="http://cruiseshipconfessions.com/img/og-img-1.jpg" />
+    <link rel="icon" href="img/favicon32.png" type="image/png">
+    <title>Cruise Ship Confessions</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/stylesheet.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic' rel='stylesheet' type='text/css'>
+    <script src="js/angular.min.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66650064-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body ng-app="CruiseShipConfessionsApp">
+
+    <div class="container">
+        <div class="mobile-banner">
+            <h3>Cruise Ship Confessions:</h3>
+            <h5>The place where ship's staff and crew can anonymously confess their darkest secrets.</h5>
+        </div>
+        <div class="outer-banner">
+            <img src="img/CSCLogo.png" class="logo">
+            <div class="tagline">
+                <p>Cruise Ship Staff and Crew:
+                    <br> <span class="second-line">Anonymously post your experiences working on cruise ships.</span></p>
+            </div>
+        </div>
+        <div class="well submit-well">
+            <form ng-controller="FormController as FormCtrl">
+                <div class="inner-banner">
+                    <img src="img/CSCLogo.png" class="logo">
+                    <div class="tagline">
+                        <p>Cruise Ship Staff and Crew:
+                            <br> <span class="second-line">Anonymously post your experiences working on cruise ships.</span></p>
+                    </div>
+                </div>
+                <div class="message-background">
+                    <div class="form-group">
+                        <div class="talk-bubble" ng-class="{'talk-bubble-focus': focusBool }" off-click="focusBool = false">
+                            <textarea class="form-control borderless" ng-model="tweet" maxlength="140" placeholder="Confess..." ng-focus="focusBool = true" id="message" ng-keyup="lengthProtection()"></textarea>
+                            <p class="help-block" ng-click="setFocus()">{{charsLeft}} characters remaining...</p>
+                        </div>
+                    </div>
+                </div>
+                <img src="img/CSCLogo.png" class="mobile-logo">
+                <div class="form-group submit-group">
+                    <p class="twitter-line">All confessions post to <a href="https://twitter.com/ShipsConfession" target="_blank">@shipsconfession</a> on twitter</p>
+                    <div class="math-line">
+                        <p class="math-title" ng-class="{'red-error': mathErrorBool}">Do simple math:</p>
+                        <p class="math-prob" ng-class="{'red-error': mathErrorBool}">{{mathProbString}}</p>
+                        <input type="text" class="form-control math-answer" ng-model="mathAnswer" maxlength="2" ng-class="{'red-error': mathErrorBool}">
+                    </div>
+                    <button type="submit" class="btn btn-default submit" ng-click="submitTweet()">Submit</button>
+                    <div ng-controller="TOSController as TOSCtrl">
+                        <p class="legal">By clicking submit you are agreeing to our <a ng-click="open()">Terms of Service</a> and that you are over the age of 18.</p>
+                    </div>
+                    <div class="return-message">
+                        <p ng-class="{'red-error': mathErrorBool || errorBool}">{{returnMessage}}</p>
+                    </div>
+                    <div class="social-links">
+                        <h3 class="connect">Connect:</h3>
+                        <a href="https://twitter.com/ShipsConfession" target="_blank">
+                            <div>
+                                <img src="img/TwitterLogo.png" class="social-logos"></div>
+                        </a>
+                        <a href="https://www.facebook.com/cruiseshipconfessions" target="_blank">
+                            <div><img src="img/FacebookLogo.png" class="social-logos"></div>
+                        </a>
+                        <a href="https://instagram.com/cruiseshipconfessions" target="_blank">
+                            <div><img src="img/InstagramLogo.png" class="social-logos"></div>
+                        </a>
+                        <a href="http://cruiseshipconfessions.tumblr.com/" target="_blank">
+                            <div><img src="img/TumblrLogo.png" class="social-logos"></div>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="social-links social-links-mobile">
+            <h3 class="connect">Connect:</h3>
+            <a href="https://twitter.com/ShipsConfession" target="_blank">
+                <div>
+                    <img src="img/TwitterLogo.png" class="social-logos"></div>
+            </a>
+            <a href="https://www.facebook.com/cruiseshipconfessions" target="_blank">
+                <div><img src="img/FacebookLogo.png" class="social-logos"></div>
+            </a>
+            <a href="https://instagram.com/cruiseshipconfessions" target="_blank">
+                <div><img src="img/InstagramLogo.png" class="social-logos"></div>
+            </a>
+            <a href="http://cruiseshipconfessions.tumblr.com/" target="_blank">
+                <div><img src="img/TumblrLogo.png" class="social-logos"></div>
+            </a>
+        </div>
+        <div ng-controller="PreviousTweetsController as PreviousTweetsCtrl" class="previous-confessions">
+            <div class="arrow" ng-click="back()">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </div>
+            <div class="person-super-container">
+                <div class="person-container">
+                    <div class="confession-container" ng-style="{'background-image': personBackground(tweets[tweet1].personNumber)}">
+                        <p>{{tweets[tweet1].text}}</p>
+                    </div>
+                    <div class="confession-info">
+                        <h4 ng-show="tweets[tweet1].personNumber != 7">{{tweets[tweet1].date | date:'MMM dd, yyyy h:mma'}}</h4>
+                        <a ng-href="https://twitter.com/ShipsConfession/status/{{tweets[tweet1].id_str}}" target="_blank" ng-show="tweets[tweet1].personNumber != 7">Twitter link <img src="img/TwitterLogoWhite.png"></a>
+                    </div>
+                </div>
+                <div class="person-container">
+                    <div class="confession-container" ng-style="{'background-image': personBackground(tweets[tweet2].personNumber)}">
+                        <p>{{tweets[tweet2].text}}</p>
+                    </div>
+                    <div class="confession-info">
+                        <h4 ng-show="tweets[tweet2].personNumber != 7">{{tweets[tweet2].date | date:'MMM dd, yyyy h:mma'}}</h4>
+                        <a ng-href="https://twitter.com/ShipsConfession/status/{{tweets[tweet2].id_str}}" target="_blank" ng-show="tweets[tweet2].personNumber != 7">Twitter link <img src="img/TwitterLogoWhite.png"></a>
+                    </div>
+                </div>
+                <div class="person-container">
+                    <div class="confession-container" ng-style="{'background-image': personBackground(tweets[tweet3].personNumber)}">
+                        <p>{{tweets[tweet3].text}}</p>
+                    </div>
+                    <div class="confession-info">
+                        <h4 ng-show="tweets[tweet3].personNumber != 7">{{tweets[tweet3].date | date:'MMM dd, yyyy h:mma'}}</h4>
+                        <a ng-href="https://twitter.com/ShipsConfession/status/{{tweets[tweet3].id_str}}" target="_blank" ng-show="tweets[tweet3].personNumber != 7">Twitter link <img src="img/TwitterLogoWhite.png"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow" ng-click="next()">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="js/ui-bootstrap-tpls-0.13.3.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

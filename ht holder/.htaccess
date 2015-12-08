@@ -1,4 +1,0 @@
-Options +FollowSymLinks
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^cruiseshipconfessions.com[nc]
-RewriteRule ^(.*)$ http://www.cruiseshipconfessions.com/$1 [r=301,nc]
